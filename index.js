@@ -1,3 +1,4 @@
+/*
 const myList = document.getElementById('items');
 const addBtn = document.getElementById('addBtn');
 const myItem = document.getElementById('item');
@@ -8,7 +9,7 @@ const clearBtn = document.getElementById('clearBtn');
     const newListItem = document.createElement('li');
     newListItem.innerHTML = item;
     myList.appendChild(newListItem);    
- }
+ } 
 
  const handleClear = () => {
     myList.innerHTML = '';
@@ -41,7 +42,8 @@ const handleListSubmit = (event) => {
         // }
     // ];
 
-    console.log(JSON.parse(localStorage.getItem('Name')))
+    console.log(JSON.parse(localStorage.getItem('Name')));
+
     if(JSON.parse(localStorage.getItem('Name'))){
         console.log("working")
         itemArrayList = JSON.parse(localStorage.getItem('Name'));
@@ -57,4 +59,33 @@ const handleListSubmit = (event) => {
     
 };
 
-addBtn.addEventListener('click', handleListSubmit)
+addBtn.addEventListener('click', handleListSubmit);
+
+*/
+
+const taskComplete = () => {
+    const task = document.getElementById("taskTitle");
+    task.classList.toggle("done");
+    console.log(task);
+}
+
+const binBtn = document.getElementById('binIcon');
+const uncheckedBtn = document.querySelector('#checkboxUncheck');
+const checkBtn = document.querySelector('#checkboxCheck');
+
+
+
+const displayToggle = () => {
+    uncheckedBtn.classList.toggle('inactiveClass');
+    checkBtn.classList.toggle('inactiveClass');
+    console.log("checkbox working");
+
+    const task = document.getElementById("taskTitle");
+    task.classList.toggle("done");
+    console.log(task);
+
+}
+
+uncheckedBtn.addEventListener('click', displayToggle);
+checkBtn.addEventListener('click', displayToggle);
+
