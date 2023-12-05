@@ -15,7 +15,7 @@ const clearBtn = document.getElementById('clearBtn');
     localStorage.removeItem('Name')    
  }
 
- clearBtn.addEventListener('click', handleClear())
+ clearBtn.addEventListener('click', handleClear)
 
  if (localStorage.getItem('Name')) {
     itemArrayList = JSON.parse(localStorage.getItem('Name'));
@@ -45,6 +45,7 @@ const handleListSubmit = (event) => {
     if(JSON.parse(localStorage.getItem('Name'))){
         console.log("working")
         itemArrayList = JSON.parse(localStorage.getItem('Name'));
+    }
 
     itemArrayList.push(myItem.value);
 
@@ -53,7 +54,7 @@ const handleListSubmit = (event) => {
     addItem(myItem.value)
 
     myItem.value = '';
-}
+    
+};
 
-addBtn.addEventListener('click', handleListSubmit);
-
+addBtn.addEventListener('click', handleListSubmit)
