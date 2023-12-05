@@ -5,18 +5,25 @@ body {
     font-weight: 400;
     line-height: 1.5;
     color: #212529;
-    text-align: left;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
 }
 
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
 .container {
     box-shadow: 0 0 5px #34506c;
     width: 100%;
-    max-width: 600px;
+    max-width: 80%;
     margin: 3rem auto;
-    padding: 0 15px;
+    padding: 0 15px;    
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -49,6 +56,72 @@ form button {
     box-shadow: 0 0 5px #295c8f;
     cursor: pointer;
 }
+
+
+
+.myListItems {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem;
+}
+
+.taskDiv {
+    list-style: none;
+    border: 2px solid rgb(45, 45, 45);
+    padding: 0rem 1rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    border-radius: 1rem;
+    background-color: #d2d2d2;
+    justify-content: space-between;
+}
+
+.taskCheckboxDiv {
+    display: flex;
+    align-items: center;
+}
+
+#checkboxUncheck, #checkboxCheck {
+    border-radius: 100%;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+#checkboxUncheck:hover, #checkboxCheck:hover {
+    background-color: rgb(196, 196, 196);
+}
+
+span.inactiveClass {
+    display: none;
+}
+
+
+.taskDiv h4 { 
+    padding-right: 3rem;
+}
+
+
+#binIcon, #editIcon {
+    color: rgb(84,84,84);
+    background-color: rgb(236, 236, 236);
+    border-radius: 4px;
+    border: 1px grey solid;
+    margin: 0.5rem;
+    cursor: pointer;
+}
+
+#editIcon {
+    color: rgb(84, 84, 84);
+}
+
+#binIcon:hover, #editIcon:hover { 
+    background-color: rgb(196, 196, 196);
+}
+
+.done {
+    text-decoration: line-through;
 
 ul li{
     list-style: none;

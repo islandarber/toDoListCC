@@ -5,19 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Get your Stuff together List</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
 
   <div class="container">
+
     <h1>Get your Stuff together List</h1>
+
     <form>
       <input type="text" placeholder="Add item" id="item">
       <button id='addBtn' type="submit">Add Item</button>
       <button id="clearBtn">Clear List</button>
     </form>
-    <ul id="list">
+    
+    <div class="myListItems">
 
-    </ul>
+      <div class="taskDiv">
+
+      <div class="taskCheckboxDiv">
+        <span id="checkboxUncheck" class="material-symbols-outlined">
+          radio_button_unchecked
+          </span>
+          <span id="checkboxCheck" class="inactiveClass material-symbols-outlined">
+            radio_button_checked
+            </span>
+
+        <h4 id="taskTitle">Example : Item 2</h4>
+      </div>
+
+        <div id="icons">
+          <span id="editIcon" class="material-symbols-outlined">
+            edit
+            </span>
+            <span id="binIcon" class="material-symbols-outlined">
+              delete
+              </span>
+        </div>
+
+      </div>
+
+      
+    </div>
+    
+
 
 
   <script src="index.js"></script>

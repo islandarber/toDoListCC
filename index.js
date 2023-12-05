@@ -1,3 +1,4 @@
+
 const myList = document.getElementById('list');
 const addBtn = document.getElementById('addBtn');
 const myItem = document.getElementById('item');
@@ -61,6 +62,9 @@ const handleListSubmit = (event) => {
         //     done: false
         // }
     // ];
+
+
+
     if(JSON.parse(localStorage.getItem('Name'))){
         itemArrayList = JSON.parse(localStorage.getItem('Name'));
     }
@@ -88,6 +92,38 @@ const handleListSubmit = (event) => {
     
 };
 
+
+addBtn.addEventListener('click', handleListSubmit);
+
+*/
+
+const taskComplete = () => {
+    const task = document.getElementById("taskTitle");
+    task.classList.toggle("done");
+    console.log(task);
+}
+
+const binBtn = document.getElementById('binIcon');
+const uncheckedBtn = document.querySelector('#checkboxUncheck');
+const checkBtn = document.querySelector('#checkboxCheck');
+
+
+
+const displayToggle = () => {
+    uncheckedBtn.classList.toggle('inactiveClass');
+    checkBtn.classList.toggle('inactiveClass');
+    console.log("checkbox working");
+
+    const task = document.getElementById("taskTitle");
+    task.classList.toggle("done");
+    console.log(task);
+
+}
+
+uncheckedBtn.addEventListener('click', displayToggle);
+checkBtn.addEventListener('click', displayToggle);
+
+
 addBtn.addEventListener('click', handleListSubmit)
 
 
@@ -104,3 +140,4 @@ myList.addEventListener("click", function(e) {
         clickedElement.style.textDecorationColor = "red";
     }
 });
+
