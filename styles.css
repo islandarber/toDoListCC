@@ -46,7 +46,7 @@ form {
     box-shadow: 0 0 5px #2586e8;
 }
 
-button {
+form button {
     width: 40%;
     padding: 0.3rem;
     margin: 15px 0;
@@ -56,6 +56,7 @@ button {
     box-shadow: 0 0 5px #295c8f;
     cursor: pointer;
 }
+
 
 
 .myListItems {
@@ -121,4 +122,7 @@ span.inactiveClass {
 
 .done {
     text-decoration: line-through;
+
+ul li{
+    list-style: none;
 }
