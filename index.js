@@ -2,10 +2,12 @@ const myList = document.getElementById('items');
 const addBtn = document.getElementById('addBtn');
 const myItem = document.getElementById('item');
 const clearBtn = document.getElementById('clearBtn');
+const doneBtn = document.querySelector('li');
 
 
  const addItem = (item) => {
     const newListItem = document.createElement('li');
+    newListItem.setAttribute("class", "li"); 
     newListItem.innerHTML = item;
     myList.appendChild(newListItem);    
  }
@@ -58,3 +60,18 @@ const handleListSubmit = (event) => {
 };
 
 addBtn.addEventListener('click', handleListSubmit)
+
+
+myList.addEventListener("click", function(e) {
+    const clickedElement = e.target;
+    const textDecorationValue = window.getComputedStyle(clickedElement).
+    getPropertyValue('text-decoration');
+    if (textDecorationValue.includes('line-through')) {
+        // If line-through is present, remove it
+        clickedElement.style.textDecoration = "none";
+    } else {
+        // If line-through is not present, add it
+        clickedElement.style.textDecoration = "line-through";
+        clickedElement.style.textDecorationColor = "red";
+    }
+});
