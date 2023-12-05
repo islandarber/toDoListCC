@@ -107,7 +107,7 @@ const displayToggle = (idNum) => {
     task.classList.toggle("done");
 
     const taskDiv = document.getElementById(`taskDiv${idNum}`);
-    console.log(taskDiv);
+    console.log(taskDiv);``
 
     myListDiv.removeChild(taskDiv);
     myListDiv.append(taskDiv);
