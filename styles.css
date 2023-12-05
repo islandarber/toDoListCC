@@ -10,6 +10,10 @@ body {
     overflow-x: hidden;
 }
 
+h1 {
+    text-align: center;
+}
+
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
@@ -66,6 +70,7 @@ form button {
     padding: 1rem;
 }
 
+
 .taskDiv {
     list-style: none;
     border: 2px solid rgb(45, 45, 45);
@@ -76,6 +81,8 @@ form button {
     border-radius: 1rem;
     background-color: #d2d2d2;
     justify-content: space-between;
+    border: 2px solid red;
+
 }
 
 .taskCheckboxDiv {
@@ -99,7 +106,7 @@ span.inactiveClass {
 
 
 .taskDiv h4 { 
-    padding-right: 3rem;
+    padding-left: 1rem;
 }
 
 
@@ -125,4 +132,9 @@ span.inactiveClass {
 }
 ul li{
     list-style: none;
+}
+
+#taskDiv174106 {
+    background-color: orange;
+    transition: 2s;
 }

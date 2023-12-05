@@ -7,40 +7,35 @@ const doneBtnLi = document.querySelector('li');
 const doneBtn = document.querySelector('.doneBtn');
 const myListDiv = document.querySelector('.myListItems');
 
+
  const addItem = (item) => {
-    // const newListItem = document.createElement('li');
-    // newListItem.innerHTML = `${item} <button class="deleteBtn">Delete</button> <button class="editbtn">Edit</button>`;
-    // myList.appendChild(newListItem);    
     let li = document.createElement('div');
     console.log(li);
-    li.id = item.id;
-    // li.innerHTML = item.title;
+    li.classList.add('taskDiv');
+    li.id = `taskDiv${item.id}`;
     li.innerHTML = `
-    <div class="taskDiv">
 
     <div class="taskCheckboxDiv">
-      <span id="checkboxUncheck" class="material-symbols-outlined">
+      <span id="checkboxUncheck ${item.id}" class="material-symbols-outlined" onclick='displayToggle(${item.id})'>
         radio_button_unchecked
         </span>
-        <span id="checkboxCheck" class="inactiveClass material-symbols-outlined">
+        <span id="checkboxCheck ${item.id}" class="inactiveClass material-symbols-outlined" onclick="displayToggle(${item.id})">
           radio_button_checked
           </span>
 
-      <h4 id="taskTitle">${item.title}</h4>
+      <h4 id="taskTitle ${item.id}">${item.title}</h4>
     </div>
 
-      <div id="icons">
+    <div id="icons">
         <span id="editIcon" class="material-symbols-outlined">
-          edit
-          </span>
-          <span id="binIcon" class="material-symbols-outlined">
+            edit
+        </span>
+        <span id="binIcon" class="material-symbols-outlined">
             delete
-            </span>
-      </div>
-    </div>`
+        </span>
+    </div>`;
 
-
-    myListDiv.appendChild(li)
+    myListDiv.prepend(li);
 
  }
 
@@ -58,22 +53,11 @@ const myListDiv = document.querySelector('.myListItems');
     })
 }
 
+
 const handleListSubmit = (event) => {
     event.preventDefault()
     let itemArrayList = [];
-    // let itemArrayList = ["string", "another string"];
-    // let itemArrayList = [
-        // {
-        //     id: 13651648453463,
-        //     title:"string",
-        //     done: true
-        // },
-        // {
-        //     id: 16315468453463,
-        //     title:"another string",
-        //     done: false
-        // }
-    // ];
+
 
 
 
@@ -108,48 +92,29 @@ const handleListSubmit = (event) => {
 addBtn.addEventListener('click', handleListSubmit);
 
 
+const displayToggle = (idNum) => {
 
-const taskComplete = () => {
-    const task = document.getElementById("taskTitle");
-    task.classList.toggle("done");
-    console.log(task);
-}
+    // GETTING THE TWO BUTTONS
+    const uncheckedBtn = document.getElementById(`checkboxUncheck ${idNum}`);
+    const checkBtn = document.getElementById(`checkboxCheck ${idNum}`);
 
-const binBtn = document.getElementById('binIcon');
-const uncheckedBtn = document.querySelector('#checkboxUncheck');
-const checkBtn = document.querySelector('#checkboxCheck');
-
-
-
-const displayToggle = () => {
+    // EXCHANGING INACTIVE CLASS BETWEEN THE TWO BUTTONS
     uncheckedBtn.classList.toggle('inactiveClass');
     checkBtn.classList.toggle('inactiveClass');
-    console.log("checkbox working");
 
-    const task = document.getElementById("taskTitle");
+    // ADDING THE STRIKETHROUGH CLASS
+    const task = document.getElementById(`taskTitle ${idNum}`);
     task.classList.toggle("done");
-    console.log(task);
+
+    const taskDiv = document.getElementById(`taskDiv${idNum}`);
+    console.log(taskDiv);
+
+    myListDiv.removeChild(taskDiv);
+    myListDiv.append(taskDiv);
 
 }
 
-uncheckedBtn.addEventListener('click', displayToggle);
-checkBtn.addEventListener('click', displayToggle);
 
 
 addBtn.addEventListener('click', handleListSubmit)
-
-
-myList.addEventListener("click", function(e) {
-    const clickedElement = e.target;
-    const textDecorationValue = window.getComputedStyle(clickedElement).
-    getPropertyValue('text-decoration');
-    if (textDecorationValue.includes('line-through')) {
-        // If line-through is present, remove it
-        clickedElement.style.textDecoration = "none";
-    } else {
-        // If line-through is not present, add it
-        clickedElement.style.textDecoration = "line-through";
-        clickedElement.style.textDecorationColor = "red";
-    }
-});
 
