@@ -5,30 +5,42 @@ const myItem = document.getElementById('item');
 const clearBtn = document.getElementById('clearBtn');
 const doneBtnLi = document.querySelector('li');
 const doneBtn = document.querySelector('.doneBtn');
-
+const myListDiv = document.querySelector('.myListItems');
 
  const addItem = (item) => {
     // const newListItem = document.createElement('li');
     // newListItem.innerHTML = `${item} <button class="deleteBtn">Delete</button> <button class="editbtn">Edit</button>`;
     // myList.appendChild(newListItem);    
-    let li = document.createElement('li');
+    let li = document.createElement('div');
+    console.log(li);
     li.id = item.id;
-    li.innerHTML = item.title;
-    console.log(item.title);
+    // li.innerHTML = item.title;
+    li.innerHTML = `
+    <div class="taskDiv">
 
-    let delButton = document.createElement('button');
-    delButton.className = 'delete';
-    delButton.innerHTML = 'Delete';
-    // delButton.addEventListener('click', handleDelete)
+    <div class="taskCheckboxDiv">
+      <span id="checkboxUncheck" class="material-symbols-outlined">
+        radio_button_unchecked
+        </span>
+        <span id="checkboxCheck" class="inactiveClass material-symbols-outlined">
+          radio_button_checked
+          </span>
 
-    let editButton = document.createElement('button');
-    editButton.innerHTML = 'Edit';
-    editButton.className = 'edit';
-    // editButton.addEventListener('click', handleEdit)
+      <h4 id="taskTitle">${item.title}</h4>
+    </div>
 
-    li.appendChild(delButton);
-    li.appendChild(editButton);
-    list.appendChild(li)
+      <div id="icons">
+        <span id="editIcon" class="material-symbols-outlined">
+          edit
+          </span>
+          <span id="binIcon" class="material-symbols-outlined">
+            delete
+            </span>
+      </div>
+    </div>`
+
+
+    myListDiv.appendChild(li)
 
  }
 
@@ -95,7 +107,7 @@ const handleListSubmit = (event) => {
 
 addBtn.addEventListener('click', handleListSubmit);
 
-*/
+
 
 const taskComplete = () => {
     const task = document.getElementById("taskTitle");
