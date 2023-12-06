@@ -80,19 +80,24 @@ const handleDelete = (e) => {
       // Make the task title content editable
       taskTitleElement.contentEditable = true;
       taskTitleElement.focus();
-  
-      // Show the "Done" button
-      const doneBtn = parentDiv.querySelector('#doneBtn');
-      doneBtn.style.display = 'inline-block';
-  
+
+      taskTitleElement.focus();
+      window.getSelection().selectAllChildren(taskTitleElement)
+      window.getSelection().collapseToEnd()
+
       // Add a blur event listener to save the changes when the user clicks outside the editable area
       taskTitleElement.addEventListener('blur', () => {
         // Save the changes and make the content not editable
         taskTitleElement.contentEditable = false;
-  
-        // Hide the "Done" button
-        doneBtn.style.display = 'none';
       });
+
+      taskTitleElement.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+          taskTitleElement.contentEditable = false;
+        };
+      });
+
     }
     // Further edit logic
   }
@@ -139,12 +144,12 @@ const handleDelete = (e) => {
 
  clearBtn.addEventListener('click', handleClear)
 
- if (localStorage.getItem('Name')) {
-    itemArrayList = JSON.parse(localStorage.getItem('Name'));
-    itemArrayList.forEach((item) => {
-        addItem(item);
-    })
-}
+//  if (localStorage.getItem('Name')) {
+//     itemArrayList = JSON.parse(localStorage.getItem('Name'));
+//     itemArrayList.forEach((item) => {
+//         addItem(item);
+//     })
+// }
 
 
 const handleListSubmit = (event) => {
@@ -200,7 +205,25 @@ const displayToggle = (idNum) => {
     task.classList.toggle("done");
 
     const taskDiv = document.getElementById(`taskDiv${idNum}`);
-    console.log(taskDiv);``
+    console.log(taskDiv);
+
+    let myVar = localStorage.getItem('Name');
+    console.log(myVar);
+
+    let completedTasks = JSON.parse(localStorage.getItem("Name"))
+    completedTasks = completedTasks.filter(element => `taskDiv${element.id}` !=idNum);
+    console.log(completedTasks);
+
+    const finalArray = completedTasks.find((element) => element.id == idNum);
+    console.log(finalArray);
+
+    finalArray.isDone = true;
+    console.log(finalArray);
+
+    completedTasks.push(finalArray);
+    localStorage.setItem("Name", JSON.stringify(completedTasks));
+
+
 
     myListDiv.removeChild(taskDiv);
     myCompletedItems.append(taskDiv);
