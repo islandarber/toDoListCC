@@ -79,22 +79,38 @@ const handleDelete = (e) => {
   
       // Make the task title content editable
       taskTitleElement.contentEditable = true;
+
+      const textLength = taskTitleElement.textContent.length;
+      console.log(textLength);
+
+    // Sets cursor to end of text
       taskTitleElement.focus();
-  
-      // Show the "Done" button
-      const doneBtn = parentDiv.querySelector('#doneBtn');
-      doneBtn.style.display = 'inline-block';
-  
+      window.getSelection().selectAllChildren(taskTitleElement)
+      window.getSelection().collapseToEnd()
+
       // Add a blur event listener to save the changes when the user clicks outside the editable area
       taskTitleElement.addEventListener('blur', () => {
         // Save the changes and make the content not editable
         taskTitleElement.contentEditable = false;
-  
-        // Hide the "Done" button
-        doneBtn.style.display = 'none';
       });
+
+      taskTitleElement.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          taskTitleElement.contentEditable = false;
+        };
+      });
+
+      let completedEdit = JSON.parse(localStorage.getItem("Name"));
+
+
+      console.log(completedEdit);
+
+      completedEdit = completedEdit.find(element => `taskDiv${element.id}` !== parentDiv.id);
+      console.log(completedEdit);
+
+      completedEdit.title = taskTitleElement.textContent;
+      console.log(completedEdit);
     }
-    // Further edit logic
   }
 
   const handleDone = () => {
@@ -137,22 +153,20 @@ const handleDelete = (e) => {
     localStorage.removeItem('Name')    
  }
 
- clearBtn.addEventListener('click', handleClear)
+clearBtn.addEventListener('click', handleClear)
 
- if (localStorage.getItem('Name')) {
+
+if (localStorage.getItem('Name')) {
     itemArrayList = JSON.parse(localStorage.getItem('Name'));
     itemArrayList.forEach((item) => {
         addItem(item);
-    })
-}
+    });
+};
 
 
 const handleListSubmit = (event) => {
     event.preventDefault()
     let itemArrayList = [];
-
-
-
 
     if(JSON.parse(localStorage.getItem('Name'))){
         itemArrayList = JSON.parse(localStorage.getItem('Name'));
@@ -200,10 +214,25 @@ const displayToggle = (idNum) => {
     task.classList.toggle("done");
 
     const taskDiv = document.getElementById(`taskDiv${idNum}`);
-    console.log(taskDiv);``
+    console.log(taskDiv);
+
+    let myVar = localStorage.getItem('Name');
+    console.log(myVar);
+
+    let completedTasks = JSON.parse(localStorage.getItem("Name"))
+    completedTasks = completedTasks.filter(element => `taskDiv${element.id}` !== idNum);
+    console.log(completedTasks);
+
+    const finalArray = completedTasks.find((element) => element.id == idNum);
+    console.log(finalArray);
+
+    finalArray.isDone = true;
+    console.log(finalArray);
+
+
 
     myListDiv.removeChild(taskDiv);
-    myCompletedItems.append(taskDiv);
+    myListDiv.append(taskDiv);
 
 }
 
