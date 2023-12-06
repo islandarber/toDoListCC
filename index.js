@@ -200,7 +200,25 @@ const displayToggle = (idNum) => {
     task.classList.toggle("done");
 
     const taskDiv = document.getElementById(`taskDiv${idNum}`);
-    console.log(taskDiv);``
+    console.log(taskDiv);
+
+    let myVar = localStorage.getItem('Name');
+    console.log(myVar);
+
+    let completedTasks = JSON.parse(localStorage.getItem("Name"))
+    completedTasks = completedTasks.filter(element => `taskDiv${element.id}` !=idNum);
+    console.log(completedTasks);
+
+    const finalArray = completedTasks.find((element) => element.id == idNum);
+    console.log(finalArray);
+
+    finalArray.isDone = true;
+    console.log(finalArray);
+
+    completedTasks.push(finalArray);
+    localStorage.setItem("Name", JSON.stringify(completedTasks));
+
+
 
     myListDiv.removeChild(taskDiv);
     myCompletedItems.append(taskDiv);
