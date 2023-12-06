@@ -11,8 +11,10 @@ const myListDiv = document.querySelector('.myListItems');
 const handleDelete = (e) => {
 
     const parentDiv = e.target.closest('.taskDiv');
+
     let todos = JSON.parse(localStorage.getItem("Name"))
-    todos = todos.filter(element => element.id !== Number(parentDiv.id))
+    todos = todos.filter(element => `taskDiv${element.id}` !== parentDiv.id);
+    
     // add the new array to our localstorage
     localStorage.setItem("Name", JSON.stringify(todos))
 
