@@ -25,93 +25,118 @@ const handleDelete = (e) => {
 }
 
 
-
- const addItem = (item) => {   
+const addItem = (item) => {   
     let li = document.createElement('div');
     li.id = `taskDiv${item.id}`;
     li.setAttribute('class', `taskDiv`);
     li.innerHTML = `
 
     <div class="taskCheckboxDiv">
-      <span id="checkboxUncheck ${item.id}" class="material-symbols-outlined checkboxUncheck" onclick='displayToggle(${item.id})'>
+        <span id="checkboxUncheck ${item.id}" class="material-symbols-outlined checkboxUncheck" onclick='displayToggle(${item.id})'>
         radio_button_unchecked
         </span>
         <span id="checkboxCheck ${item.id}" class="inactiveClass material-symbols-outlined checkboxCheck" onclick="displayToggle(${item.id})">
-          radio_button_checked
-          </span>
+            radio_button_checked
+            </span>
 
-      <h4 id="taskTitle ${item.id}">${item.title}</h4>
+        <h4 id="taskTitle ${item.id}">${item.title}</h4>
     </div>
 
-      <div id="icons">
+        <div id="icons">
         <span id="editIcon" onclick="handleEdit(event)" class="material-symbols-outlined" >
-          edit
-          </span>
-          <span id="binIcon" onclick="handleDelete(event)" class="material-symbols-outlined">
+            edit
+            </span>
+            <span id="binIcon" onclick="handleDelete(event)" class="material-symbols-outlined">
             delete
             </span>
             <button id="doneBtn" onclick="handleDone() class="material-symbols-outlined" style="display: none;">
             done
-          </button>
-      </div>
+            </button>
+        </div>
     </div>`
 
     myListDiv.prepend(li);
 
- }
+}
 
 
- const handleEdit = (e) => {
+const handleEdit = (e) => {
     console.log('Edit clicked');
-  
+
     // Access the parent div of the edit icon
     const parentDiv = e.target.closest('.taskDiv');
 
     console.log(parentDiv);
-  
+
     // Check if the parentDiv is found
     if (parentDiv) {
-      // Get the task title element within the parent div
-      let taskTitleElement = parentDiv.querySelector('.taskCheckboxDiv');
-      taskTitleElement = taskTitleElement.querySelector('h4');
+        // Get the task title element within the parent div
+        let taskTitleElement = parentDiv.querySelector('.taskCheckboxDiv');
+        taskTitleElement = taskTitleElement.querySelector('h4');
 
-      console.log(taskTitleElement);
-  
-      // Make the task title content editable
-      taskTitleElement.contentEditable = true;
+        let taskTitleInnerText = taskTitleElement.innerText;
 
-      const textLength = taskTitleElement.textContent.length;
-      console.log(textLength);
+        console.log(taskTitleElement);
+        console.log(taskTitleInnerText);
+        console.log(parentDiv.id)
 
-    // Sets cursor to end of text
-      taskTitleElement.focus();
-      window.getSelection().selectAllChildren(taskTitleElement)
-      window.getSelection().collapseToEnd()
+        // Make the task title content editable
+        taskTitleElement.contentEditable = true;
 
-      // Add a blur event listener to save the changes when the user clicks outside the editable area
-      taskTitleElement.addEventListener('blur', () => {
+        const textLength = taskTitleElement.textContent.length;
+        console.log(textLength);
+
+        // Sets cursor to end of text
+        taskTitleElement.focus();
+
+        taskTitleElement.focus();
+        window.getSelection().selectAllChildren(taskTitleElement)
+        window.getSelection().collapseToEnd()
+
+        // Add a blur event listener to save the changes when the user clicks outside the editable area
+        taskTitleElement.addEventListener('blur', () => {
         // Save the changes and make the content not editable
-        taskTitleElement.contentEditable = false;
-      });
+            taskTitleElement.contentEditable = false;
 
-      taskTitleElement.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          taskTitleElement.contentEditable = false;
-        };
-      });
+            let editedTasks = JSON.parse(localStorage.getItem("Name"));
+            let idString = parentDiv.id;
+            let finalEditString = idString.slice(7);
+        
+            // Find the index of the edited task in the array
+            let editedTaskIndex = editedTasks.findIndex((element) => element.id == finalEditString);
+    
+            if (editedTaskIndex !== -1) {
+                // Update the title of the task at the found index
+                editedTasks[editedTaskIndex].title = taskTitleElement.textContent;
+    
+                // Update the entire array in local storage
+                localStorage.setItem("Name", JSON.stringify(editedTasks));
+            }
+        });
 
-      let completedEdit = JSON.parse(localStorage.getItem("Name"));
-
-
-      console.log(completedEdit);
-
-      completedEdit = completedEdit.find(element => `taskDiv${element.id}` !== parentDiv.id);
-      console.log(completedEdit);
-
-      completedEdit.title = taskTitleElement.textContent;
-      console.log(completedEdit);
-    }
-  }
+        taskTitleElement.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                taskTitleElement.contentEditable = false;
+        
+                let editedTasks = JSON.parse(localStorage.getItem("Name"));
+                let idString = parentDiv.id;
+                let finalEditString = idString.slice(7);
+        
+                // Find the index of the edited task in the array
+                let editedTaskIndex = editedTasks.findIndex((element) => element.id == finalEditString);
+        
+                if (editedTaskIndex !== -1) {
+                    // Update the title of the task at the found index
+                    editedTasks[editedTaskIndex].title = taskTitleElement.textContent;
+        
+                    // Update the entire array in local storage
+                    localStorage.setItem("Name", JSON.stringify(editedTasks));
+                };
+            };
+        });
+    };
+};
 
   const handleDone = () => {
   
@@ -147,7 +172,6 @@ const handleDelete = (e) => {
     }
   }
 
-
  const handleClear = () => {
     myListDiv.innerHTML = '';
     localStorage.removeItem('Name')    
@@ -155,14 +179,12 @@ const handleDelete = (e) => {
 
 clearBtn.addEventListener('click', handleClear)
 
-
-if (localStorage.getItem('Name')) {
+ if (localStorage.getItem('Name')) {
     itemArrayList = JSON.parse(localStorage.getItem('Name'));
     itemArrayList.forEach((item) => {
         addItem(item);
-    });
-};
-
+    })
+}
 
 const handleListSubmit = (event) => {
     event.preventDefault()
@@ -195,9 +217,7 @@ const handleListSubmit = (event) => {
     
 };
 
-
 addBtn.addEventListener('click', handleListSubmit);
-
 
 const displayToggle = (idNum) => {
 
@@ -216,27 +236,27 @@ const displayToggle = (idNum) => {
     const taskDiv = document.getElementById(`taskDiv${idNum}`);
     console.log(taskDiv);
 
-    let myVar = localStorage.getItem('Name');
-    console.log(myVar);
-
     let completedTasks = JSON.parse(localStorage.getItem("Name"))
-    completedTasks = completedTasks.filter(element => `taskDiv${element.id}` !== idNum);
+    completedTasks = completedTasks.filter(element => `taskDiv${element.id}` !=idNum);
     console.log(completedTasks);
 
     const finalArray = completedTasks.find((element) => element.id == idNum);
-    console.log(finalArray);
 
-    finalArray.isDone = true;
-    console.log(finalArray);
+    if(!finalArray.isDone){
+        console.log('running the IF');
+        finalArray.isDone = true;
+        myListDiv.removeChild(taskDiv);
+        myCompletedItems.append(taskDiv);
+    
+    } else if (finalArray.isDone){
+        console.log('running the ELSE');
+        finalArray.isDone = false;
+        myCompletedItems.removeChild(taskDiv);
+        myListDiv.append(taskDiv);
+    } 
 
-
-
-    myListDiv.removeChild(taskDiv);
-    myListDiv.append(taskDiv);
+    localStorage.setItem("Name", JSON.stringify(completedTasks));
 
 }
 
-
-
-addBtn.addEventListener('click', handleListSubmit)
-
+addBtn.addEventListener('click', handleListSubmit);
