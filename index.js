@@ -25,7 +25,8 @@ const handleDelete = (e) => {
 
  const addItem = (item) => {   
     let li = document.createElement('div');
-    li.id = item.id;
+    li.id = `taskDiv${item.id}`;
+    li.setAttribute('class', `taskDiv`);
     li.innerHTML = `
 
     <div class="taskCheckboxDiv">
@@ -62,11 +63,16 @@ const handleDelete = (e) => {
   
     // Access the parent div of the edit icon
     const parentDiv = e.target.closest('.taskDiv');
+
+    console.log(parentDiv);
   
     // Check if the parentDiv is found
     if (parentDiv) {
       // Get the task title element within the parent div
-      const taskTitleElement = parentDiv.querySelector('#taskTitle');
+      let taskTitleElement = parentDiv.querySelector('.taskCheckboxDiv');
+      taskTitleElement = taskTitleElement.querySelector('h4');
+
+      console.log(taskTitleElement);
   
       // Make the task title content editable
       taskTitleElement.contentEditable = true;

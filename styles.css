@@ -73,7 +73,7 @@ form button {
 
 .taskDiv {
     list-style: none;
-    border: 2px solid rgb(45, 45, 45);
+    border: 2px solid rgb(22, 22, 22);
     padding: 0rem 1rem;
     margin: 1rem 0;
     display: flex;
@@ -81,7 +81,6 @@ form button {
     border-radius: 1rem;
     background-color: #d2d2d2;
     justify-content: space-between;
-    border: 2px solid red;
 
 }
 
