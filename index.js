@@ -16,10 +16,10 @@ const myListDiv = document.querySelector('.myListItems');
     li.innerHTML = `
 
     <div class="taskCheckboxDiv">
-      <span id="checkboxUncheck ${item.id}" class="material-symbols-outlined" onclick='displayToggle(${item.id})'>
+      <span id="checkboxUncheck ${item.id}" class="material-symbols-outlined checkboxUncheck" onclick='displayToggle(${item.id})'>
         radio_button_unchecked
         </span>
-        <span id="checkboxCheck ${item.id}" class="inactiveClass material-symbols-outlined" onclick="displayToggle(${item.id})">
+        <span id="checkboxCheck ${item.id}" class="inactiveClass material-symbols-outlined checkboxCheck" onclick="displayToggle(${item.id})">
           radio_button_checked
           </span>
 
