@@ -1,5 +1,4 @@
 
-const myList = document.getElementById('list');
 const addBtn = document.getElementById('addBtn');
 const myItem = document.getElementById('item');
 const clearBtn = document.getElementById('clearBtn');
@@ -8,11 +7,25 @@ const doneBtn = document.querySelector('.doneBtn');
 const myListDiv = document.querySelector('.myListItems');
 
 
- const addItem = (item) => {
+
+const handleDelete = (e) => {
+
+    const parentDiv = e.target.closest('.taskDiv');
+    let todos = JSON.parse(localStorage.getItem("Name"))
+    todos = todos.filter(element => element.id !== Number(parentDiv.id))
+    // add the new array to our localstorage
+    localStorage.setItem("Name", JSON.stringify(todos))
+
+    // remove the div from the hmtl 
+    parentDiv.remove()
+
+}
+
+
+
+ const addItem = (item) => {   
     let li = document.createElement('div');
-    console.log(li);
-    li.classList.add('taskDiv');
-    li.id = `taskDiv${item.id}`;
+    li.id = item.id;
     li.innerHTML = `
 
     <div class="taskCheckboxDiv">
@@ -26,21 +39,92 @@ const myListDiv = document.querySelector('.myListItems');
       <h4 id="taskTitle ${item.id}">${item.title}</h4>
     </div>
 
-    <div id="icons">
-        <span id="editIcon" class="material-symbols-outlined">
-            edit
-        </span>
-        <span id="binIcon" class="material-symbols-outlined">
+      <div id="icons">
+        <span id="editIcon" onclick="handleEdit(event)" class="material-symbols-outlined" >
+          edit
+          </span>
+          <span id="binIcon" onclick="handleDelete(event)" class="material-symbols-outlined">
             delete
-        </span>
-    </div>`;
+            </span>
+            <button id="doneBtn" onclick="handleDone() class="material-symbols-outlined" style="display: none;">
+            done
+          </button>
+      </div>
+    </div>`
 
     myListDiv.prepend(li);
 
  }
 
+
+ const handleEdit = (e) => {
+    console.log('Edit clicked');
+  
+    // Access the parent div of the edit icon
+    const parentDiv = e.target.closest('.taskDiv');
+  
+    // Check if the parentDiv is found
+    if (parentDiv) {
+      // Get the task title element within the parent div
+      const taskTitleElement = parentDiv.querySelector('#taskTitle');
+  
+      // Make the task title content editable
+      taskTitleElement.contentEditable = true;
+      taskTitleElement.focus();
+  
+      // Show the "Done" button
+      const doneBtn = parentDiv.querySelector('#doneBtn');
+      doneBtn.style.display = 'inline-block';
+  
+      // Add a blur event listener to save the changes when the user clicks outside the editable area
+      taskTitleElement.addEventListener('blur', () => {
+        // Save the changes and make the content not editable
+        taskTitleElement.contentEditable = false;
+  
+        // Hide the "Done" button
+        doneBtn.style.display = 'none';
+      });
+    }
+    // Further edit logic
+  }
+
+  const handleDone = () => {
+  
+
+    // Access the parent div of the edit icon
+    const parentDiv = e.target.closest('.taskDiv');
+  
+    // Check if the parentDiv is found
+    if (parentDiv) {
+      // Get the task title element within the parent div
+      const taskTitleElement = parentDiv.querySelector('#taskTitle');
+  
+      // Make the task title content editable
+      taskTitleElement.contentEditable = true;
+      taskTitleElement.focus();
+  
+      // Show the "Done" button and hide the "Edit" button
+      const editBtn = parentDiv.querySelector('#editIcon');
+      const doneBtn = parentDiv.querySelector('#doneBtn');
+  
+      editBtn.style.display = 'none';
+      doneBtn.style.display = 'inline-block';
+  
+      // Add a blur event listener to save the changes when the user clicks outside the editable area
+      taskTitleElement.addEventListener('blur', () => {
+        // Save the changes and make the content not editable
+        taskTitleElement.contentEditable = false;
+  
+        // Show the "Edit" button and hide the "Done" button
+        editBtn.style.display = 'inline-block';
+        doneBtn.style.display = 'none';
+      });
+    }
+  }
+
+
  const handleClear = () => {
-    myList.innerHTML = '';
+    myListDiv.innerHTML = '';
     localStorage.removeItem('Name')    
  }
 
