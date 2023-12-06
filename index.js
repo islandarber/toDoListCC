@@ -5,16 +5,36 @@ const clearBtn = document.getElementById('clearBtn');
 const doneBtnLi = document.querySelector('li');
 const doneBtn = document.querySelector('.doneBtn');
 const myListDiv = document.querySelector('.myListItems');
+const myCompletedItems = document.querySelector('.myCompletedItems');
 
 
 
 const handleDelete = (e) => {
 
-    const parentDiv = e.target.closest('.taskDiv');
-    let todos = JSON.parse(localStorage.getItem("Name"))
-    todos = todos.filter(element => element.id !== Number(parentDiv.id))
+    let parentDiv = e.target.closest('.taskDiv');
+
+    console.log(parentDiv);
+    console.log(typeof parentDiv);
+
+    parentDiv = JSON.stringify(parentDiv.id);
+
+    console.log(parentDiv);
+    console.log(typeof parentDiv);
+
+
+    parentDiv = parentDiv.slice(8);
+
+    console.log(parentDiv);
+
+    let todos = JSON.parse(localStorage.getItem("Name"));
+
+    console.log(todos[0].id);
+
+    todos = todos.filter(element => element.id !== Number(parentDiv.id));
+
+    console.log(todos);
     // add the new array to our localstorage
-    localStorage.setItem("Name", JSON.stringify(todos))
+    localStorage.setItem("Name", JSON.stringify(todos));
 
     // remove the div from the hmtl 
     parentDiv.remove()
@@ -200,7 +220,7 @@ const displayToggle = (idNum) => {
     console.log(taskDiv);``
 
     myListDiv.removeChild(taskDiv);
-    myListDiv.append(taskDiv);
+    myCompletedItems.append(taskDiv);
 
 }
 
