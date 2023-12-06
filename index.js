@@ -11,28 +11,11 @@ const myCompletedItems = document.querySelector('.myCompletedItems');
 
 const handleDelete = (e) => {
 
-    let parentDiv = e.target.closest('.taskDiv');
+    const parentDiv = e.target.closest('.taskDiv');
 
-    console.log(parentDiv);
-    console.log(typeof parentDiv);
-
-    parentDiv = JSON.stringify(parentDiv.id);
-
-    console.log(parentDiv);
-    console.log(typeof parentDiv);
-
-
-    parentDiv = parentDiv.slice(8);
-
-    console.log(parentDiv);
-
-    let todos = JSON.parse(localStorage.getItem("Name"));
-
-    console.log(todos[0].id);
-
-    todos = todos.filter(element => element.id !== Number(parentDiv.id));
-
-    console.log(todos);
+    let todos = JSON.parse(localStorage.getItem("Name"))
+    todos = todos.filter(element => `taskDiv${element.id}` !== parentDiv.id);
+    
     // add the new array to our localstorage
     localStorage.setItem("Name", JSON.stringify(todos));
 
