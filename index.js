@@ -260,3 +260,44 @@ const displayToggle = (idNum) => {
 }
 
 addBtn.addEventListener('click', handleListSubmit);
+
+
+// Sorting Tasks when the page loads
+
+const pageLoadSort = () => {
+
+    const locallyStoredItems = JSON.parse(localStorage.getItem('Name'));
+    let isDone = document.querySelectorAll('.taskDiv');
+
+    if (locallyStoredItems == null){
+        console.log('No items in local storage');
+    } else {
+        locallyStoredItems.forEach(element => {
+            console.log(element);
+            if (element.isDone == true){
+                isDone.forEach(e => {
+                    e = e.id.toString().slice(7);
+                    if (e == element.id && element.isDone == true){
+                        console.log(e);
+                        let completedDiv = document.getElementById(`taskDiv${e}`);
+                        myListDiv.removeChild(completedDiv);
+                        myCompletedItems.append(completedDiv);
+
+                        const task = document.getElementById(`taskTitle ${e}`);
+                        task.classList.toggle('done');
+                        
+
+                        const uncheckedBtn = document.getElementById(`checkboxUncheck ${e}`);
+                        const checkBtn = document.getElementById(`checkboxCheck ${e}`);
+                    
+                        // EXCHANGING INACTIVE CLASS BETWEEN THE TWO BUTTONS
+                        uncheckedBtn.classList.toggle('inactiveClass');
+                        checkBtn.classList.toggle('inactiveClass');
+                    };
+                });
+            };
+        });
+    };
+};
+
+window.addEventListener('load', pageLoadSort);
