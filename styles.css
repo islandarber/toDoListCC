@@ -1,6 +1,10 @@
 body {
-    background-color: #f2f2f2;
-    font-family: 'Roboto', sans-serif;
+    background-color: #ebebf9;
+    opacity: 0.8;
+    background-image:  linear-gradient(#e1e1ff 2.8000000000000003px, transparent 2.8000000000000003px), linear-gradient(90deg, #e1e1ff 2.8000000000000003px, transparent 2.8000000000000003px), linear-gradient(#e1e1ff 1.4000000000000001px, transparent 1.4000000000000001px), linear-gradient(90deg, #e1e1ff 1.4000000000000001px, #ebebf9 1.4000000000000001px);
+    background-size: 70px 70px, 70px 70px, 14px 14px, 14px 14px;
+    background-position: -2.8000000000000003px -2.8000000000000003px, -2.8000000000000003px -2.8000000000000003px, -1.4000000000000001px -1.4000000000000001px, -1.4000000000000001px -1.4000000000000001px;    
+    font-family: 'Schoolbell', cursive;
     font-size: 16px;
     font-weight: 400;
     line-height: 1.5;
@@ -12,6 +16,7 @@ body {
 
 h1 {
     text-align: center;
+    color: #261f56;
 }
 
 .material-symbols-outlined {
@@ -27,37 +32,64 @@ h1 {
     width: 100%;
     max-width: 80%;
     margin: 3rem auto;
-    padding: 0 15px;    
+    padding: 1rem 2rem;    
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #ededed;
 }
+
 
 form {
   display: flex;
+  width: 100%;
   gap: 10px;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+#formDiv {
+    display: flex;
+    width: 50%;
+    padding: 0;
+    margin: 0;
+    padding-left: 2rem;
+}
+
+#addBtn {
+    color: rgb(15, 0, 3);
+}
+
+#addBtn:hover {
+    color: rgb(136, 136, 136);
+}
+
+
+#clearBtnDiv {
+    display: flex;
+    width: 50%;
+    padding-left: 2rem;
+   
 }
 
 #item { 
     width: 100%;
     padding: 0.5rem;
     margin: 15px 0;
-    border: #11467b 1px solid;
-    border-radius: 5px;
+    border-radius: 1rem;
+    border-style: none;
     background-color: #fff;
-    box-shadow: 0 0 5px #2586e8;
+    font-family: 'Schoolbell', cursive;
+    padding-left: 1rem;
 }
 
 form button {
-    width: 40%;
     padding: 0.3rem;
     margin: 15px 0;
-    border: #2789eb 1px solid;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 0 5px #295c8f;
+    border-style: none;    
+    background: none;
     cursor: pointer;
 }
 
@@ -66,23 +98,59 @@ form button {
 .myListItems, .myCompletedItems {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    padding: 1rem;
+    justify-content: center;
+}
+
+.myCompletedItems {
+    opacity: 0.4;
+
 }
 
 
 .taskDiv {
     list-style: none;
-    border: 2px solid rgb(22, 22, 22);
-    padding: 0rem 1rem;
-    margin: 1rem 0;
+    padding: 1rem 1rem;
     display: flex;
+    margin: 0.5rem 0rem;
     align-items: center;
     border-radius: 1rem;
     background-color: #d2d2d2;
     justify-content: space-between;
-    flex: 1 1 0%;
+    max-width: 80%;
+    min-width: 80%;
 
+    animation: show 600ms 100ms cubic-bezier(0.38, 0.97, 0.56, 0.76) forwards;
+    opacity: 0;
+    transform: rotateX(-90deg);
+    transform-origin: top center;
+
+    transition: 0.5s;
+}
+
+.taskDiv:hover { 
+    background-color: #bdbbbb;
+
+}
+      
+@keyframes show {
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+#clearBtn, #hideBtn {
+    font-size: 1rem;
+    font-family: 'Schoolbell', cursive;
+    padding: 0rem 1rem;
+    color: #261f56;
+    background-color: rgb(214, 214, 214);
+    border-radius: 1rem;
+    margin-right: 1rem;
+}
+
+#clearBtn:hover, #hideBtn:hover {
+    background-color: rgb(161, 159, 159);
 }
 
 .taskCheckboxDiv {
@@ -97,7 +165,7 @@ form button {
 }
 
 .checkboxUncheck:hover, .checkboxCheck:hover {
-    background-color: rgb(196, 196, 196);
+    background-color: rgb(173, 173, 173);
 }
 
 span.inactiveClass {
@@ -108,24 +176,37 @@ span.inactiveClass {
 .taskDiv h4 { 
     padding-left: 1rem;
     padding-right: 1rem;
+    font-size: 1.4rem;
+    margin: 0;
 }
 
 
 #binIcon, #editIcon {
-    color: rgb(84,84,84);
-    background-color: rgb(236, 236, 236);
-    border-radius: 4px;
+    color: rgb(39, 39, 39);
     border: 1px grey solid;
-    margin: 0.5rem;
+    margin: 0rem;
     cursor: pointer;
+    border-style: none;
+    padding: 0.1rem;
+    transition: 0.5s;
+
+}
+
+#icons {
+    padding: 0;
+    margin: 0;
 }
 
 #editIcon {
-    color: rgb(84, 84, 84);
 }
 
-#binIcon:hover, #editIcon:hover { 
-    background-color: rgb(196, 196, 196);
+#editIcon:hover { 
+    color: rgb(0, 0, 0);
+    color: rgb(85, 121, 238);
+}
+
+#binIcon:hover {
+    color: rgb(186, 3, 3);
 }
 
 .done {
@@ -135,7 +216,78 @@ ul li{
     list-style: none;
 }
 
-#taskDiv174106 {
-    background-color: orange;
-    transition: 2s;
+#taskSections {
+    display: flex;
+    width: 100%;
+    margin: 0;
 }
+
+
+
+#toDoItemsDiv {
+    width: 50%;
+    margin: 2rem 1rem;
+    padding-bottom: 2rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    margin-top: 0;
+}
+
+#completedItemsDiv { 
+    width: 50%;
+    margin: 2rem 1rem;
+    padding-bottom: 2rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    margin-top: 0;
+}
+
+#taskSections h2 {
+    padding-left: 1rem;
+    color: rgb(122, 1, 1);
+    font-size: 2rem;
+    margin-bottom: 0rem;
+}
+
+#completedItemsDiv h2 {
+    color: rgb(0, 182, 0);
+}
+
+.myCompletedItems {
+    transition: 0.5s;
+}
+
+.hide {
+    opacity: 0;
+}
+
+@media only screen and (max-width: 600px) {
+    #taskSections {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    #toDoItemsDiv, #completedItemsDiv {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        margin-top: 2rem;
+    }
+
+    #toDoItemsDiv {
+        margin-top: 0rem;
+    }
+
+    h2 {
+        font-size: 20rem;
+    }
+
+    .myListItems, .myCompletedItems {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .taskDiv {
+        width: auto;
+    }
+  }

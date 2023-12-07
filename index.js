@@ -44,8 +44,9 @@ const addItem = (item) => {
 
         <div id="icons">
         <span id="editIcon" onclick="handleEdit(event)" class="material-symbols-outlined" >
-            edit
+            edit_note
             </span>
+            
             <span id="binIcon" onclick="handleDelete(event)" class="material-symbols-outlined">
             delete
             </span>
@@ -296,8 +297,47 @@ const pageLoadSort = () => {
                     };
                 });
             };
-        });
+        }); 
     };
 };
 
 window.addEventListener('load', pageLoadSort);
+
+let myHiddenPref = "";
+
+const hideCompleted = () => {
+    console.log('clicked');
+    const completedItems = document.querySelector('.myCompletedItems');
+    const hideBtn = document.querySelector('#hideBtn');
+    console.log(myHiddenPref);
+
+    localStorage.setItem("hiddenPref", myHiddenPref);
+
+    if (myHiddenPref == false){
+        hideBtn.innerText = "Show Completed";
+        console.log("YES I WANT IT HIDDEN")
+        myHiddenPref = true;
+        localStorage.setItem("hiddenPref", myHiddenPref);
+    } else {
+        hideBtn.innerText = "Hide Completed";
+        myHiddenPref = false;
+        console.log("SHOW ME IT")
+        localStorage.setItem("hiddenPref", myHiddenPref);
+    }
+
+    completedItems.classList.toggle('hide');
+
+}
+
+const checkForPref = () => {
+    let newInfo = localStorage.getItem("hiddenPref");
+    console.log(newInfo);
+    if (newInfo == "true") {
+        hideCompleted();
+    };
+};
+
+window.addEventListener('load', checkForPref);
+
+
+
