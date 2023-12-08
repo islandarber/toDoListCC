@@ -27,6 +27,7 @@ h1 {
   'opsz' 24
 }
 
+/* CONTAINER FOR ALL */
 .container {
     box-shadow: 0 0 5px #34506c;
     width: 100%;
@@ -41,7 +42,7 @@ h1 {
     background-color: #ededed;
 }
 
-
+/* FORM FOR SUBMITTING NEW TASK */
 form {
   display: flex;
   width: 100%;
@@ -94,19 +95,7 @@ form button {
 }
 
 
-
-.myListItems, .myCompletedItems {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.myCompletedItems {
-    opacity: 0.4;
-    transition: 0.5s;
-}
-
-
+/* THE MAIN TASK DIV */
 .taskDiv {
     list-style: none;
     padding: 1rem 1rem;
@@ -139,6 +128,7 @@ form button {
     }
 }
 
+/* FOR BUTTONS IN TASKDIVS */
 #clearBtn, #hideBtn {
     font-size: 1rem;
     font-family: 'Schoolbell', cursive;
@@ -153,6 +143,8 @@ form button {
     background-color: rgb(161, 159, 159);
 }
 
+
+/* DIVS FOR CHECKBOX CONTROLS */
 .taskCheckboxDiv {
     display: flex;
     align-items: center;
@@ -180,7 +172,7 @@ span.inactiveClass {
     margin: 0;
 }
 
-
+/* ICONS ON TASK DIVS */
 #binIcon, #editIcon {
     color: rgb(39, 39, 39);
     border: 1px grey solid;
@@ -189,15 +181,11 @@ span.inactiveClass {
     border-style: none;
     padding: 0.1rem;
     transition: 0.5s;
-
 }
 
 #icons {
     padding: 0;
     margin: 0;
-}
-
-#editIcon {
 }
 
 #editIcon:hover { 
@@ -209,21 +197,33 @@ span.inactiveClass {
     color: rgb(186, 3, 3);
 }
 
-.done {
-    text-decoration: line-through;
-}
-ul li{
-    list-style: none;
-}
-
+/* Container for all task sections */
 #taskSections {
     display: flex;
     width: 100%;
     margin: 0;
 }
 
+.myListItems, .myCompletedItems {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
+.myCompletedItems {
+    opacity: 0.4;
+    transition: 0.5s;
+}
 
+/* TO DO ITEMS TITLE */
+#taskSections h2 {
+    padding-left: 1rem;
+    color: rgb(122, 1, 1);
+    font-size: 2rem;
+    margin-bottom: 0rem;
+}
+
+/* TO DO ITEMS DIV */
 #toDoItemsDiv {
     width: 50%;
     margin: 2rem 1rem;
@@ -233,6 +233,12 @@ ul li{
     margin-top: 0;
 }
 
+/* COMPLETED ITEMS TITLE */
+#completedItemsDiv h2 {
+    color: rgb(0, 182, 0);
+}
+
+/* COMPLETED ITEMS DIV */
 #completedItemsDiv { 
     width: 50%;
     margin: 2rem 1rem;
@@ -242,20 +248,18 @@ ul li{
     margin-top: 0;
 }
 
-#taskSections h2 {
-    padding-left: 1rem;
-    color: rgb(122, 1, 1);
-    font-size: 2rem;
-    margin-bottom: 0rem;
+
+/* THE DONE CLASS */
+.done {
+    text-decoration: line-through;
 }
 
-#completedItemsDiv h2 {
-    color: rgb(0, 182, 0);
-}
-
+/* THE HIDDEN CLASS */
 .hide {
     opacity: 0;
 }
+
+/* RESPONSIVE DESIGN QUERIES */
 
 @media only screen and (max-width: 600px) {
     #taskSections {
@@ -314,8 +318,4 @@ ul li{
         align-items: center;
         align-self: center;
     }
-
-    #clearBtn {
-    }
-
 }
