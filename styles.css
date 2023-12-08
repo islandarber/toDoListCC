@@ -103,7 +103,7 @@ form button {
 
 .myCompletedItems {
     opacity: 0.4;
-
+    transition: 0.5s;
 }
 
 
@@ -253,10 +253,6 @@ ul li{
     color: rgb(0, 182, 0);
 }
 
-.myCompletedItems {
-    transition: 0.5s;
-}
-
 .hide {
     opacity: 0;
 }
@@ -286,6 +282,11 @@ ul li{
         align-items: center;
         justify-content: center;
     }
+
+    .myCompletedItems {
+        margin-bottom: 4rem;
+    }
+    
 
     .taskDiv {
         width: auto;
